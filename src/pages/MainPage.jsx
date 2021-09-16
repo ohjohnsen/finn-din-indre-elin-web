@@ -10,6 +10,7 @@ const MainPage = () => {
       alignItems="center"
       padding="5rem"
       overflowY="scroll"
+      color="white"
     >
       <Text as="h1" fontSize="3rem" marginBottom="2rem">
         Finn din indre Elin

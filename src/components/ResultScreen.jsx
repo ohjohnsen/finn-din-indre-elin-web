@@ -1,11 +1,10 @@
 import React from 'react';
-import { Flex, Button, Box, Text, Select } from '@chakra-ui/react';
+import { Flex, Box, Text } from '@chakra-ui/react';
 
-const SecondScreen = () => {
+const ResultScreen = () => {
   return (
     <Flex
-      width="100%"
-      maxWidth="50rem"
+      width={['18rem', '25rem', '40rem']}
       background="pink.100"
       padding="5rem"
       flexDirection="column"
@@ -14,9 +13,11 @@ const SecondScreen = () => {
       boxShadow="2xl"
       fontSize="1.5rem"
     >
-      <h1>Woohoo</h1>
+      <Box>
+        <Text color="pink.800">Resultat</Text>
+      </Box>
     </Flex>
   );
 };
 
-export default SecondScreen;
+export default ResultScreen;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Flex, Select, Text, Button, Fade } from '@chakra-ui/react';
+import { Flex, Text, Fade } from '@chakra-ui/react';
 import FirstScreen from '../components/FirstScreen';
-import SecondScreen from '../components/SecondScreen';
+import ProgressScreen from '../components/ProgressScreen';
+import ResultScreen from '../components/ResultScreen';
 
 const MainPage = () => {
   const [state, setState] = useState('first');
@@ -15,10 +16,10 @@ const MainPage = () => {
   return (
     <Flex
       height="100vh"
+      width="100vw"
       background="pink.300"
       flexDirection="column"
       alignItems="center"
-      padding="5rem"
       overflowY="scroll"
       color="white"
     >
@@ -29,11 +30,22 @@ const MainPage = () => {
         <FirstScreen
           data={data}
           setData={setData}
-          onClick={() => setState('second')}
+          onClick={() => setState('progress')}
         />
       </Fade>
-      <Fade in={state === 'second'} unmountOnExit>
-        <SecondScreen />
+      <Fade
+        in={state === 'progress'}
+        delay={{ enter: 0.2, exit: 0 }}
+        unmountOnExit
+      >
+        <ProgressScreen onContinue={() => setState('result')} />
+      </Fade>
+      <Fade
+        in={state === 'result'}
+        delay={{ enter: 0.4, exit: 0 }}
+        unmountOnExit
+      >
+        <ResultScreen />
       </Fade>
     </Flex>
   );

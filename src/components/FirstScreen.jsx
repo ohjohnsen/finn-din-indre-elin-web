@@ -22,8 +22,10 @@ const FirstScreen = ({ data, setData, onClick }) => {
         <Box>
           <Text color="pink.800">Biologisk kjønn</Text>
           <Select
+            variant="filled"
             placeholder="Velg kjønn"
             background="pink.500"
+            color="white"
             size="lg"
             fontSize={['1rem', '1.2rem', '1.5rem']}
             required
@@ -40,8 +42,10 @@ const FirstScreen = ({ data, setData, onClick }) => {
         <Box marginTop="1rem">
           <Text color="pink.800">Alder</Text>
           <Select
+            variant="filled"
             placeholder="Velg alder"
             background="pink.500"
+            color="white"
             size="lg"
             fontSize={['1rem', '1.2rem', '1.5rem']}
             required
@@ -61,8 +65,10 @@ const FirstScreen = ({ data, setData, onClick }) => {
         <Box marginTop="1rem">
           <Text color="pink.800">Vekt</Text>
           <Select
+            variant="filled"
             placeholder="Velg vekt"
             background="pink.500"
+            color="white"
             size="lg"
             fontSize={['1rem', '1.2rem', '1.5rem']}
             required
@@ -79,6 +85,31 @@ const FirstScreen = ({ data, setData, onClick }) => {
             ))}
           </Select>
         </Box>
+        <Box marginTop="1rem">
+          <Text color="pink.800">Sykkelens vekt</Text>
+          <Select
+            variant="filled"
+            placeholder="Velg sykkelens vekt"
+            background="pink.500"
+            color="white"
+            size="lg"
+            fontSize={['1rem', '1.2rem', '1.5rem']}
+            required
+            onChange={event => {
+              const copy = { ...data };
+              copy.bikeWeight = event.target.value
+                ? event.target.value
+                : undefined;
+              setData(copy);
+            }}
+          >
+            {new Array(300).fill('', 5, 31).map((_, index) => (
+              <option key={index} value={index}>
+                {index} kg
+              </option>
+            ))}
+          </Select>
+        </Box>
         <Button
           background="pink.300"
           fontSize={['1rem', '1.12rem', '1.25rem']}
@@ -88,7 +119,7 @@ const FirstScreen = ({ data, setData, onClick }) => {
           }}
           type="submit"
         >
-          BEREGN
+          GÅ VIDERE
         </Button>
       </form>
     </Flex>

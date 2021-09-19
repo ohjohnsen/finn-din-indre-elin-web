@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Flex, Text, Fade } from '@chakra-ui/react';
 import FirstScreen from '../components/FirstScreen';
+import SecondScreen from '../components/SecondScreen';
 import ProgressScreen from '../components/ProgressScreen';
 import ResultScreen from '../components/ResultScreen';
 
 const MainPage = () => {
   const [state, setState] = useState('first');
   const [data, setData] = useState({
+    gender: undefined,
     age: undefined,
     weight: undefined,
-    gender: undefined,
+    bikeWeight: undefined,
   });
 
   console.log(data);
@@ -28,6 +30,17 @@ const MainPage = () => {
       </Text>
       <Fade in={state === 'first'} unmountOnExit>
         <FirstScreen
+          data={data}
+          setData={setData}
+          onClick={() => setState('second')}
+        />
+      </Fade>
+      <Fade
+        in={state === 'second'}
+        delay={{ enter: 0.2, exit: 0 }}
+        unmountOnExit
+      >
+        <SecondScreen
           data={data}
           setData={setData}
           onClick={() => setState('progress')}

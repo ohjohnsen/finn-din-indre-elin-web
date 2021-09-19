@@ -1,7 +1,7 @@
 import React from 'react';
-import { Flex, Box, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
-const ResultScreen = () => {
+const ResultScreen = ({ data }) => {
   return (
     <Flex
       width={['18rem', '25rem', '40rem']}
@@ -13,9 +13,10 @@ const ResultScreen = () => {
       boxShadow="2xl"
       fontSize="1.5rem"
     >
-      <Box>
-        <Text color="pink.800">Resultat</Text>
-      </Box>
+      <Text color="pink.800">Resultat</Text>
+      <Text color="pink.800" fontSize={['2rem', '3rem', '4rem']}>
+        {data.innerElinFactorPercentage}%
+      </Text>
     </Flex>
   );
 };

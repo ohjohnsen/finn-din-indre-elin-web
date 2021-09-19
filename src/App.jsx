@@ -17,6 +17,7 @@ const theme = extendTheme({
             '>option': {
               background: 'pink.500',
               color: 'white',
+              fontSize: '1.25rem',
             },
             ">option[value='coffee']": {
               background: 'black',

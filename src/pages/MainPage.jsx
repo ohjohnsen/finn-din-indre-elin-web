@@ -12,11 +12,18 @@ const MainPage = () => {
     age: undefined,
     bodyweight: undefined,
     bikeWeight: undefined,
-    elinTime: undefined,
+    elinTimeMinutes: undefined,
+    elinTimeSeconds: undefined,
+    elinTimeTotalSeconds: undefined,
     elinTimeString: undefined,
+    currentTimeMinutes: undefined,
+    currentTimeSeconds: undefined,
+    currentTimeTotalSeconds: undefined,
+    currentTimeString: undefined,
+    innerElinFactor: undefined,
+    innerElinFactorPercentage: undefined,
   });
 
-  console.log(data);
   return (
     <Flex
       height="100vh"
@@ -45,7 +52,7 @@ const MainPage = () => {
         <SecondScreen
           data={data}
           setData={setData}
-          onClick={() => setState('progress')}
+          onClick={() => setState('result')}
         />
       </Fade>
       <Fade
@@ -57,10 +64,10 @@ const MainPage = () => {
       </Fade>
       <Fade
         in={state === 'result'}
-        delay={{ enter: 0.4, exit: 0 }}
+        delay={{ enter: 0.2, exit: 0 }}
         unmountOnExit
       >
-        <ResultScreen />
+        <ResultScreen data={data} />
       </Fade>
     </Flex>
   );

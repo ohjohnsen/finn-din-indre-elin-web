@@ -4,25 +4,24 @@ import { getElinTime, getElinTimeString } from '../lib/calculations';
 
 const FirstScreen = ({ data, setData, onClick }) => {
   return (
-    <Flex
-      width={['18rem', '25rem', '40rem']}
-      background="pink.100"
-      padding={['2rem', '3.5rem', '5rem']}
-      flexDirection="column"
-      gridGap="2rem"
-      borderRadius="1rem"
-      boxShadow="2xl"
-      fontSize={['1rem', '1.2rem', '1.5rem']}
+    <form
+      onSubmit={event => {
+        event.preventDefault();
+        const copy = { ...data, ...getElinTime(data) };
+        copy.elinTimeString = getElinTimeString(data);
+        setData(copy);
+        onClick();
+      }}
     >
-      <form
-        onSubmit={event => {
-          event.preventDefault();
-          const copy = { ...data };
-          copy.elinTime = getElinTime(data);
-          copy.elinTimeString = getElinTimeString(data);
-          setData(copy);
-          onClick();
-        }}
+      <Flex
+        width={['18rem', '25rem', '40rem']}
+        background="pink.100"
+        padding={['2rem', '3.5rem', '5rem']}
+        flexDirection="column"
+        gridGap="2rem"
+        borderRadius="1rem"
+        boxShadow="2xl"
+        fontSize={['1rem', '1.2rem', '1.5rem']}
       >
         <Box>
           <Text color="pink.800">Biologisk kjønn</Text>
@@ -40,11 +39,11 @@ const FirstScreen = ({ data, setData, onClick }) => {
               setData(copy);
             }}
           >
-            <option value="dame">Dame</option>
-            <option value="mann">Mann</option>
+            <option value="female">Dame</option>
+            <option value="male">Mann</option>
           </Select>
         </Box>
-        <Box marginTop="1rem">
+        <Box>
           <Text color="pink.800">Alder</Text>
           <Select
             variant="filled"
@@ -56,7 +55,9 @@ const FirstScreen = ({ data, setData, onClick }) => {
             required
             onChange={event => {
               const copy = { ...data };
-              copy.age = event.target.value ? event.target.value : undefined;
+              copy.age = event.target.value
+                ? parseInt(event.target.value)
+                : undefined;
               setData(copy);
             }}
           >
@@ -67,7 +68,7 @@ const FirstScreen = ({ data, setData, onClick }) => {
             ))}
           </Select>
         </Box>
-        <Box marginTop="1rem">
+        <Box>
           <Text color="pink.800">Kroppsvekt</Text>
           <Select
             variant="filled"
@@ -80,7 +81,7 @@ const FirstScreen = ({ data, setData, onClick }) => {
             onChange={event => {
               const copy = { ...data };
               copy.bodyweight = event.target.value
-                ? event.target.value
+                ? parseInt(event.target.value)
                 : undefined;
               setData(copy);
             }}
@@ -92,7 +93,7 @@ const FirstScreen = ({ data, setData, onClick }) => {
             ))}
           </Select>
         </Box>
-        <Box marginTop="1rem">
+        <Box>
           <Text color="pink.800">Sykkelens vekt</Text>
           <Select
             variant="filled"
@@ -105,7 +106,7 @@ const FirstScreen = ({ data, setData, onClick }) => {
             onChange={event => {
               const copy = { ...data };
               copy.bikeWeight = event.target.value
-                ? event.target.value
+                ? parseInt(event.target.value)
                 : undefined;
               setData(copy);
             }}
@@ -128,8 +129,8 @@ const FirstScreen = ({ data, setData, onClick }) => {
         >
           GÅ VIDERE
         </Button>
-      </form>
-    </Flex>
+      </Flex>
+    </form>
   );
 };
 

@@ -1,7 +1,7 @@
 import * as C from './constants';
 
 const getAgeFactor = age => {
-  const difference = age - 40;
+  const difference = age < 35 ? -5 : age - 40;
   const factor =
     age >= 40
       ? difference * C.ageHandicapAbove40
@@ -9,13 +9,16 @@ const getAgeFactor = age => {
   return factor;
 };
 
-const getBodyweightFactor = bodyweight => {
-  const difference = bodyweight - C.bodyweightBenchmark;
+const getBodyweightFactor = data => {
+  const difference =
+    data.gender === 'male' && data.bodyweight < 65
+      ? -2
+      : data.bodyweight - C.bodyweightBenchmark;
   const factor = difference * C.bodyweightHandicap;
   return factor;
 };
 
-const getBightWeightFactor = bikeWeight => {
+const getBikeWeightFactor = bikeWeight => {
   const difference = bikeWeight - C.bikeWeightBenchmark;
   const factor = difference * C.equipmentWeightHandicap;
   return factor;
@@ -26,21 +29,21 @@ const getTotalFactor = data => {
   const totalFactor =
     genderFactor +
     getAgeFactor(data.age) +
-    getBodyweightFactor(data.bodyweight) +
-    getBightWeightFactor(data.bikeWeight);
+    getBodyweightFactor(data) +
+    getBikeWeightFactor(data.bikeWeight);
   return totalFactor;
 };
 
 export const getElinTime = data => {
   const [minutesString, secondsString] = C.timeBenchmark.split(':');
   const totalSeconds = parseInt(minutesString) * 60 + parseInt(secondsString);
-  const elinTimeTotalSeconds = totalSeconds * getTotalFactor(data);
+  const elinTimeTotalSeconds = Math.floor(totalSeconds * getTotalFactor(data));
   const elinTimeMinutes = Math.floor(elinTimeTotalSeconds / 60);
-  const elinTimeSeconds = Math.round(elinTimeTotalSeconds % 60);
+  const elinTimeSeconds = elinTimeTotalSeconds % 60;
   const elinTime = {
-    minutes: elinTimeMinutes,
-    seconds: elinTimeSeconds,
-    totalSeconds: elinTimeTotalSeconds,
+    elinTimeMinutes,
+    elinTimeSeconds,
+    elinTimeTotalSeconds,
   };
   return elinTime;
 };
@@ -48,6 +51,12 @@ export const getElinTime = data => {
 export const getElinTimeString = data => {
   const elinTime = getElinTime(data);
   const elinTimeString =
-    elinTime.minutes.toString() + ':' + elinTime.seconds.toString();
+    elinTime.elinTimeMinutes.toLocaleString('no', {
+      minimumIntegerDigits: 2,
+    }) +
+    ':' +
+    elinTime.elinTimeSeconds.toLocaleString('no', {
+      minimumIntegerDigits: 2,
+    });
   return elinTimeString;
 };

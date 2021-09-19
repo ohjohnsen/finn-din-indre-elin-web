@@ -10,8 +10,10 @@ const MainPage = () => {
   const [data, setData] = useState({
     gender: undefined,
     age: undefined,
-    weight: undefined,
+    bodyweight: undefined,
     bikeWeight: undefined,
+    elinTime: undefined,
+    elinTimeString: undefined,
   });
 
   console.log(data);

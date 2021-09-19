@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { Flex, Button } from '@chakra-ui/react';
+import React from 'react';
+import { Flex, Button, Text } from '@chakra-ui/react';
 
 const SecondScreen = ({ data, setData, onClick }) => {
-  useEffect(() => {}, []);
   return (
     <Flex
       width={['18rem', '25rem', '40rem']}
@@ -21,6 +20,15 @@ const SecondScreen = ({ data, setData, onClick }) => {
       >
         Google Maps
       </a>
+      <Flex
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="center"
+        gridGap="1rem"
+      >
+        <Text>Din Elin-tid:</Text>
+        <Text fontSize={['5rem']}>{data.elinTimeString}</Text>
+      </Flex>
       <form
         onSubmit={event => {
           event.preventDefault();
@@ -36,7 +44,7 @@ const SecondScreen = ({ data, setData, onClick }) => {
         }}
         type="submit"
       >
-        BEREGN
+        FINN DIN INDRE ELIN
       </Button>
     </Flex>
   );

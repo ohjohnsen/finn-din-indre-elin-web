@@ -1,5 +1,6 @@
 import React from 'react';
 import { Flex, Button, Box, Text, Select } from '@chakra-ui/react';
+import { getElinTime, getElinTimeString } from '../lib/calculations';
 
 const FirstScreen = ({ data, setData, onClick }) => {
   return (
@@ -16,6 +17,10 @@ const FirstScreen = ({ data, setData, onClick }) => {
       <form
         onSubmit={event => {
           event.preventDefault();
+          const copy = { ...data };
+          copy.elinTime = getElinTime(data);
+          copy.elinTimeString = getElinTimeString(data);
+          setData(copy);
           onClick();
         }}
       >
@@ -63,10 +68,10 @@ const FirstScreen = ({ data, setData, onClick }) => {
           </Select>
         </Box>
         <Box marginTop="1rem">
-          <Text color="pink.800">Vekt</Text>
+          <Text color="pink.800">Kroppsvekt</Text>
           <Select
             variant="filled"
-            placeholder="Velg vekt"
+            placeholder="Velg kroppsvekt"
             background="pink.500"
             color="white"
             size="lg"
@@ -74,7 +79,9 @@ const FirstScreen = ({ data, setData, onClick }) => {
             required
             onChange={event => {
               const copy = { ...data };
-              copy.weight = event.target.value ? event.target.value : undefined;
+              copy.bodyweight = event.target.value
+                ? event.target.value
+                : undefined;
               setData(copy);
             }}
           >

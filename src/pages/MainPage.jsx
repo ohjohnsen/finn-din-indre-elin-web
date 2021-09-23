@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Flex, Text, Fade } from '@chakra-ui/react';
+import { Flex, Box, Fade } from '@chakra-ui/react';
 import FirstScreen from '../components/FirstScreen';
 import SecondScreen from '../components/SecondScreen';
 import ProgressScreen from '../components/ProgressScreen';
 import ResultScreen from '../components/ResultScreen';
+import logo from '../assets/logo.png';
 
 const MainPage = () => {
   const [state, setState] = useState('first');
@@ -34,39 +35,19 @@ const MainPage = () => {
       overflowY="scroll"
       color="white"
     >
-      <Text as="h1" fontSize="3rem" marginBottom="2rem">
-        Finn din indre Elin
-      </Text>
+      <Box padding={['2rem 1rem', '2rem 2rem', '2rem 4rem']}>
+        <img src={logo} alt="Logo" />
+      </Box>
       <Fade in={state === 'first'} unmountOnExit>
-        <FirstScreen
-          data={data}
-          setData={setData}
-          onClick={() => setState('second')}
-        />
+        <FirstScreen data={data} setData={setData} onClick={() => setState('second')} />
       </Fade>
-      <Fade
-        in={state === 'second'}
-        delay={{ enter: 0.2, exit: 0 }}
-        unmountOnExit
-      >
-        <SecondScreen
-          data={data}
-          setData={setData}
-          onClick={() => setState('result')}
-        />
+      <Fade in={state === 'second'} delay={{ enter: 0.2, exit: 0 }} unmountOnExit>
+        <SecondScreen data={data} setData={setData} onClick={() => setState('result')} />
       </Fade>
-      <Fade
-        in={state === 'progress'}
-        delay={{ enter: 0.2, exit: 0 }}
-        unmountOnExit
-      >
+      <Fade in={state === 'progress'} delay={{ enter: 0.2, exit: 0 }} unmountOnExit>
         <ProgressScreen onContinue={() => setState('result')} />
       </Fade>
-      <Fade
-        in={state === 'result'}
-        delay={{ enter: 0.2, exit: 0 }}
-        unmountOnExit
-      >
+      <Fade in={state === 'result'} delay={{ enter: 0.2, exit: 0 }} unmountOnExit>
         <ResultScreen data={data} />
       </Fade>
     </Flex>

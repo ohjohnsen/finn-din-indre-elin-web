@@ -16,13 +16,26 @@ const FirstScreen = ({ data, setData, onClick }) => {
       <Flex
         width={['18rem', '25rem', '40rem']}
         background="pink.100"
-        padding={['2rem', '3.5rem', '5rem']}
+        padding={['2rem', '3rem', '4rem']}
         flexDirection="column"
-        gridGap="2rem"
+        gridGap={['0.5rem', '1rem', '1.5rem']}
         borderRadius="1rem"
         boxShadow="2xl"
         fontSize={['1rem', '1.2rem', '1.5rem']}
       >
+        <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
+          Alle bør finne sin indre Elin.
+        </Text>
+        <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
+          For å finne din prosentvise Elin må du fylle inn data i kalkulatoren under og trykke neste. Du vil da få en
+          tid på en bestemt strekning som må tilbakelegges med sykkel.
+        </Text>
+        <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
+          Denne tiden blir matchet mot Elin-tid og du vil få din Elin-prosent, eller nærmere bestemt din indre Elin.
+        </Text>
+        <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
+          Så enkelt – lykke til.
+        </Text>
         <Box>
           <Text color="pink.800">Biologisk kjønn</Text>
           <Select
@@ -55,9 +68,7 @@ const FirstScreen = ({ data, setData, onClick }) => {
             required
             onChange={event => {
               const copy = { ...data };
-              copy.age = event.target.value
-                ? parseInt(event.target.value)
-                : undefined;
+              copy.age = event.target.value ? parseInt(event.target.value) : undefined;
               setData(copy);
             }}
           >
@@ -80,9 +91,7 @@ const FirstScreen = ({ data, setData, onClick }) => {
             required
             onChange={event => {
               const copy = { ...data };
-              copy.bodyweight = event.target.value
-                ? parseInt(event.target.value)
-                : undefined;
+              copy.bodyweight = event.target.value ? parseInt(event.target.value) : undefined;
               setData(copy);
             }}
           >
@@ -105,9 +114,7 @@ const FirstScreen = ({ data, setData, onClick }) => {
             required
             onChange={event => {
               const copy = { ...data };
-              copy.bikeWeight = event.target.value
-                ? parseInt(event.target.value)
-                : undefined;
+              copy.bikeWeight = event.target.value ? parseInt(event.target.value) : undefined;
               setData(copy);
             }}
           >
@@ -121,7 +128,7 @@ const FirstScreen = ({ data, setData, onClick }) => {
         <Button
           background="pink.300"
           fontSize={['1rem', '1.12rem', '1.25rem']}
-          marginTop="2rem"
+          marginTop="1rem"
           _hover={{
             background: 'pink.200',
           }}

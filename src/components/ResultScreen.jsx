@@ -15,7 +15,7 @@ const ResultScreen = ({ data }) => {
       fontSize="1.5rem"
       alignItems="center"
     >
-      <Text color="pink.800" fontSize={['2rem', '3rem', '4rem']}>
+      <Text color="pink.800" fontSize={['1.5rem', '2.2rem', '3.5rem']}>
         Du er {data.innerElinFactorPercentage}% Elin
       </Text>
       <Text color="pink.800" fontSize={['1rem', '1.5rem', '2rem']} textAlign="center">

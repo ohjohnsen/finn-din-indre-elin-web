@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Box, Fade } from '@chakra-ui/react';
+import { Flex, Box, Fade, Text, Link } from '@chakra-ui/react';
 import FirstScreen from '../components/FirstScreen';
 import SecondScreen from '../components/SecondScreen';
 import ProgressScreen from '../components/ProgressScreen';
@@ -50,6 +50,13 @@ const MainPage = () => {
       <Fade in={state === 'result'} delay={{ enter: 0.2, exit: 0 }} unmountOnExit>
         <ResultScreen data={data} />
       </Fade>
+      <Text paddingTop="1rem" paddingBottom="1rem" fontSize={['0.7rem', '0.85rem', '1rem']}>
+        Av Rune Myklebust og{' '}
+        <Link href="mailto:oystein@holvikjohnsen.no" _hover={{ textDecoration: 'underline' }}>
+          Øystein Holvik Johnsen
+        </Link>{' '}
+        med ♥
+      </Text>
     </Flex>
   );
 };

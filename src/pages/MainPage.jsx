@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Flex, Box, Fade, Text, Link } from '@chakra-ui/react';
 import FirstScreen from '../components/FirstScreen';
 import SecondScreen from '../components/SecondScreen';
-import ProgressScreen from '../components/ProgressScreen';
 import ResultScreen from '../components/ResultScreen';
 import logo from '../assets/logo.png';
 
@@ -39,16 +38,33 @@ const MainPage = () => {
         <img src={logo} alt="Logo" />
       </Box>
       <Fade in={state === 'first'} unmountOnExit>
-        <FirstScreen data={data} setData={setData} onClick={() => setState('second')} />
+        <FirstScreen
+          data={data}
+          setData={setData}
+          onClick={() => {
+            setState('second');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
       </Fade>
       <Fade in={state === 'second'} delay={{ enter: 0.2, exit: 0 }} unmountOnExit>
-        <SecondScreen data={data} setData={setData} onClick={() => setState('result')} />
-      </Fade>
-      <Fade in={state === 'progress'} delay={{ enter: 0.2, exit: 0 }} unmountOnExit>
-        <ProgressScreen onContinue={() => setState('result')} />
+        <SecondScreen
+          data={data}
+          setData={setData}
+          onClick={() => {
+            setState('result');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
       </Fade>
       <Fade in={state === 'result'} delay={{ enter: 0.2, exit: 0 }} unmountOnExit>
-        <ResultScreen data={data} />
+        <ResultScreen
+          data={data}
+          onClick={() => {
+            setState('first');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
       </Fade>
       <Text paddingTop="1rem" paddingBottom="1rem" fontSize={['0.7rem', '0.85rem', '1rem']}>
         Av Rune Myklebust og{' '}

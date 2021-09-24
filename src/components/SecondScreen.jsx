@@ -1,5 +1,10 @@
 import React from 'react';
-import { Flex, Button, Text, Select } from '@chakra-ui/react';
+import { Flex, Button, Text, Select, Image, Box, Link } from '@chakra-ui/react';
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
+import kart from '../assets/kart.png';
+import start from '../assets/start.png';
+import maal from '../assets/maal.png';
 
 const SecondScreen = ({ data, setData, onClick }) => {
   return (
@@ -17,34 +22,57 @@ const SecondScreen = ({ data, setData, onClick }) => {
       <Flex
         width={['18rem', '25rem', '40rem']}
         background="pink.100"
-        padding={['2rem', '3.5rem', '5rem']}
+        padding={['2rem', '3rem', '4rem']}
         flexDirection="column"
-        gridGap="2rem"
+        gridGap={['1rem', '1.5rem', '2rem']}
         borderRadius="1rem"
         boxShadow="2xl"
         fontSize={['1rem', '1.2rem', '1.5rem']}
         alignItems="center"
       >
         <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
-          Trykk på Google maps for å se strekningen som skal tilbakelegges på sykkel.
-        </Text>{' '}
-        <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
-          Start - er der gjerdet begynner ved øvre inngang til Skansemyren idrettsplass
-        </Text>{' '}
-        <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
-          Mål – er der det er en strek i asfalten etter den siste bratte bakken, (der grusen begynte før sykkel VM) like
-          etter krysset inn til Søre Kamvei.
+          Trykk på Google Maps for å se strekningen som skal tilbakelegges på sykkel, og på bilder for å zoome inn.
         </Text>
-        <a
-          href="https://www.google.no/maps/dir/60.3934843,5.3406797/60.3926525,5.3497704/@60.3922536,5.3422133,16.48z/data=!4m2!4m1!3e1"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {' '}
-          <Text color="pink.800" fontSize={['1rem', '1.5rem', '2rem']}>
-            Se rute på Google Maps
+
+        <Flex flexDirection="column" width="100%" alignItems="center">
+          <Zoom>
+            <Box>
+              <Image src={kart} alt="Bilde av kart" />
+            </Box>
+          </Zoom>
+          <Link
+            color="pink.800"
+            href="https://www.google.no/maps/dir/60.3933369,5.3413883/60.3926525,5.3497704/@60.3921845,5.3437245,17z/data=!4m2!4m1!3e1"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Text fontSize={['1rem', '1.25rem', '1.5rem']}>Google Maps</Text>
+          </Link>
+        </Flex>
+
+        <Flex alignItems="center" gridGap="0.5rem">
+          <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
+            Start – er der gjerdet begynner ved øvre inngang til Skansemyren idrettsplass
           </Text>
-        </a>
+          <Zoom>
+            <Box width="5rem">
+              <Image src={start} alt="Bilde av startområdet" width="100px" />
+            </Box>
+          </Zoom>
+        </Flex>
+
+        <Flex alignItems="center" gridGap="0.5rem">
+          <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
+            Mål – er der det er en strek i asfalten etter den siste bratte bakken, (der grusen begynte før sykkel VM)
+            like etter krysset inn til Søre Kamvei.
+          </Text>
+          <Zoom>
+            <Box width="5rem">
+              <Image src={maal} alt="Bilde av målområdet" />
+            </Box>
+          </Zoom>
+        </Flex>
+
         <Flex flexDirection="row" alignItems="center" gridGap="1rem">
           <Text color="pink.800" fontSize={['1rem', '1.5rem', '2rem']}>
             Din Elin-tid:
@@ -53,61 +81,69 @@ const SecondScreen = ({ data, setData, onClick }) => {
             {data.elinTimeString}
           </Text>
         </Flex>
-        <Flex flexDirection="row" width="15rem">
-          <Select
-            variant="filled"
-            placeholder="min"
-            background="pink.500"
-            color="white"
-            size={['sm', 'md', 'lg']}
-            borderRadius="0.25rem"
-            fontSize={['1rem', '1.2rem', '2rem']}
-            textAlign="center"
-            required
-            onChange={event => {
-              const copy = { ...data };
-              copy.currentTimeMinutes = event.target.value ? event.target.value : undefined;
-              setData(copy);
-            }}
-          >
-            {new Array(150).fill('', 0, 100).map((_, index) => (
-              <option key={index} value={index}>
-                {index.toLocaleString('no', {
-                  minimumIntegerDigits: 2,
-                })}
-              </option>
-            ))}
-          </Select>
-          <Text>:</Text>
-          <Select
-            variant="filled"
-            placeholder="sek"
-            background="pink.500"
-            color="white"
-            size={['sm', 'md', 'lg']}
-            borderRadius="0.25rem"
-            fontSize={['1rem', '1.2rem', '2rem']}
-            textAlign="center"
-            required
-            onChange={event => {
-              const copy = { ...data };
-              copy.currentTimeSeconds = event.target.value ? event.target.value : undefined;
-              setData(copy);
-            }}
-          >
-            {new Array(150).fill('', 1, 60).map((_, index) => (
-              <option key={index} value={index}>
-                {index.toLocaleString('no', {
-                  minimumIntegerDigits: 2,
-                })}
-              </option>
-            ))}
-          </Select>
+
+        <Flex flexDirection="column" alignItems="center" gridGap={['0.3rem', '0.4rem', '0.5rem']}>
+          <Text color="pink.800" fontSize={['1rem', '1.5rem', '2rem']}>
+            Din faktiske tid:
+          </Text>
+          <Flex flexDirection="row" width={['10rem', '12.5rem', '15rem']}>
+            <Select
+              variant="filled"
+              placeholder="min"
+              background="pink.500"
+              color="white"
+              size={['sm', 'md', 'lg']}
+              borderRadius="0.25rem"
+              fontSize={['1rem', '1.2rem', '2rem']}
+              textAlign="center"
+              required
+              onChange={event => {
+                const copy = { ...data };
+                copy.currentTimeMinutes = event.target.value ? event.target.value : undefined;
+                setData(copy);
+              }}
+            >
+              {new Array(150).fill('', 0, 100).map((_, index) => (
+                <option key={index} value={index}>
+                  {index.toLocaleString('no', {
+                    minimumIntegerDigits: 2,
+                  })}
+                </option>
+              ))}
+            </Select>
+            <Text color="pink.800" fontSize={['1rem', '1.2rem', '2rem']} padding="0 0.25rem">
+              :
+            </Text>
+            <Select
+              variant="filled"
+              placeholder="sek"
+              background="pink.500"
+              color="white"
+              size={['sm', 'md', 'lg']}
+              borderRadius="0.25rem"
+              fontSize={['1rem', '1.2rem', '2rem']}
+              textAlign="center"
+              required
+              onChange={event => {
+                const copy = { ...data };
+                copy.currentTimeSeconds = event.target.value ? event.target.value : undefined;
+                setData(copy);
+              }}
+            >
+              {new Array(150).fill('', 1, 60).map((_, index) => (
+                <option key={index} value={index}>
+                  {index.toLocaleString('no', {
+                    minimumIntegerDigits: 2,
+                  })}
+                </option>
+              ))}
+            </Select>
+          </Flex>
         </Flex>
         <Button
           background="pink.300"
           fontSize={['1rem', '1.12rem', '1.25rem']}
-          marginTop="2rem"
+          marginTop="1rem"
           _hover={{
             background: 'pink.200',
           }}

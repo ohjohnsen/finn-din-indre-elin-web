@@ -35,7 +35,7 @@ const MainPage = () => {
       overflowY="scroll"
       color="white"
     >
-      <Box padding={['2rem 1rem', '2rem 2rem', '2rem 4rem']}>
+      <Box padding={['2rem 1rem', '2rem 2rem', '2rem 4rem']} maxWidth="60rem">
         <img src={logo} alt="Logo" />
       </Box>
       <Fade in={state === 'first'} unmountOnExit>

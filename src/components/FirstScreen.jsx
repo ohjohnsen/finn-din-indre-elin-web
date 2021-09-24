@@ -28,7 +28,7 @@ const FirstScreen = ({ data, setData, onClick }) => {
         </Text>
         <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
           For å finne din prosentvise Elin må du fylle inn data i kalkulatoren under og trykke neste. Du vil da få en
-          tid på en bestemt strekning som må tilbakelegges med sykkel.
+          tid på en bestemt strekning som må tilbakelegges på sykkel.
         </Text>
         <Text color="pink.800" fontSize={['0.75rem', '1rem', '1.2rem']}>
           Denne tiden blir matchet mot Elin-tid og du vil få din Elin-prosent, eller nærmere bestemt din indre Elin.

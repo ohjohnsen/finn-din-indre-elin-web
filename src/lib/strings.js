@@ -21,11 +21,11 @@ export const resultStrings = [
   },
   {
     lowLimit: 93,
-    message: 'Formen er god og adrenalinet gir ekstra piff. Elin kaster jakken.',
+    message: 'Din form er god og adrenalinet gir ekstra piff. Elin kaster jakken.',
   },
   {
     lowLimit: 90,
-    message: 'Du får styrke og Elin får puls.',
+    message: 'Dette gir deg styrke og Elin begynner å få puls.',
   },
   {
     lowLimit: 80,
